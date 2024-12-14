@@ -1,0 +1,8 @@
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    key VARCHAR UNIQUE NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
+    deleted_at TIMESTAMP
+  );
