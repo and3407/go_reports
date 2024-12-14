@@ -1,9 +1,14 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+)
 
 type Task struct {
-	gorm.Model 
-	Title string
-	Key string `gorm:"index:idx_key_unique,unique;not null"`
+	Id int `json:"id"`
+	Title string `json:"title"`
+	Key string `json:"key"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	DeletedAt time.Time `json:"deletedAt"`
 }

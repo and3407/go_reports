@@ -1,10 +1,15 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+)
 
 type Report struct {
-	gorm.Model 
-	TaskId int
-	WorkdayId int
-	TimeSpent int
+	Id int `json:"id"`
+	TaskId int `json:"taskId"`
+	WorkdayId int `json:"workdayId"`
+	TimeSpent int `json:"timeSpent"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	DeletedAt time.Time `json:"deletedAt"`
 }

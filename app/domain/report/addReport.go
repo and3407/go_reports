@@ -3,9 +3,9 @@ package report
 import "github.com/and3407/go_reports/app/db/models"
 
 type AddReportDto struct {
-	TaskId int `json:"taskId"`
-	WorkdayId int `json:"workdayId"`
-	TimeSpent int `json:"timeSpent"`
+	TaskId int 
+	WorkdayId int 
+	TimeSpent int 
 }
 
 func AddReport(dto AddReportDto) (models.Report, bool) {
