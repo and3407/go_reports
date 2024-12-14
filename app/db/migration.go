@@ -3,21 +3,14 @@ package db
 import (
 	"fmt"
 	"log"
-
-	// "github.com/and3407/go_reports/app/db/models"
-
+	
 	"github.com/spf13/viper"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"github.com/golang-migrate/migrate/v4"
+    _ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/pkger"
 )
 
-var Connect gorm.DB
-
-func Init() {
-	Connect = connectPG()
-}
-
-func connectPG() gorm.DB {
+func MigrateUp() {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 
@@ -27,9 +20,8 @@ func connectPG() gorm.DB {
 	port := viper.Get("DB_PORT").(string)
 	dbName := viper.Get("DB_NAME").(string)
 
-
-	url := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s",
+	pgUrl := fmt.Sprintf(
+		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		user,
 		password,
 		host,
@@ -37,11 +29,15 @@ func connectPG() gorm.DB {
 		dbName,
 	)
 
-	db, err := gorm.Open(postgres.Open(url), &gorm.Config{})
+	sourceUrl := "pkger:///app/db/migrations"
+
+    m, err := migrate.New(sourceUrl, pgUrl)
 
 	if err != nil {
-		log.Fatalln(err)
+		log.Println("Migrate error", err)
+
+		return
 	}
 
-	return *db
+    m.Up()
 }

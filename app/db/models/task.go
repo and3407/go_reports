@@ -10,5 +10,4 @@ type Task struct {
 	Key string `json:"key"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
-	DeletedAt time.Time `json:"deletedAt"`
 }

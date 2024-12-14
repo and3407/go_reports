@@ -13,6 +13,9 @@ go run ./main.go
 
 ````
 # Миграции Goolang-migrate CLI
+```
+https://github.com/golang-migrate/migrate
+```
 
 - Создание миграций
 ````

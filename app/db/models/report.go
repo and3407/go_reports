@@ -11,5 +11,4 @@ type Report struct {
 	TimeSpent int `json:"timeSpent"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
-	DeletedAt time.Time `json:"deletedAt"`
 }
