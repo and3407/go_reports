@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/and3407/go_reports/app/domain/task"
+	"github.com/and3407/go_reports/app/http/requests/task"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,14 +13,8 @@ type TaskController struct {
 
 }
 
-type CreateTaskRequest struct {
-	Title string `json:"title" binding:"required"`
-	Key string `json:"key" binding:"required"`
-	Archived bool `json:"archived" binding:"boolean"`
-}
-
 func (controller TaskController) AddTask(ginContext *gin.Context) {
-	var request CreateTaskRequest
+	var request requests.CreateTaskRequest
 	
 	if err := ginContext.ShouldBindJSON(&request); err != nil {
 		ginContext.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
