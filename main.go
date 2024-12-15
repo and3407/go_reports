@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	db.MigrateUp()
 	db.Init()
 	server.Init()
 }
