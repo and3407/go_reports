@@ -12,12 +12,25 @@ type TaskController struct {
 
 }
 
-func (controller TaskController) AddTask(ginContext *gin.Context) {
-	dto := task.AddTaskDto{}
+type CreateTaskRequest struct {
+	Title string `json:"title" binding:"required"`
+	Key string `json:"key" binding:"required"`
+	Archived bool `json:"archived" binding:"boolean"`
+}
 
-	if err := ginContext.BindJSON(&dto); err != nil {
-		ginContext.AbortWithError(http.StatusBadRequest, err)
+func (controller TaskController) AddTask(ginContext *gin.Context) {
+	var request CreateTaskRequest
+	
+	if err := ginContext.ShouldBindJSON(&request); err != nil {
+		ginContext.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+
 		return
+	}
+
+	dto := task.AddTaskDto{
+		Title: request.Title,
+		Key: request.Key,
+		Archived: request.Archived,
 	}
 
 	task, ok := task.AddTask(dto)
