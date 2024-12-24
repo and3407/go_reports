@@ -1,0 +1,9 @@
+CREATE TABLE reports (
+    id SERIAL PRIMARY KEY,
+    task_id INTEGER NOT NULL,
+    workday_id INTEGER NOT NULL,
+    time_spent INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tasks (id)
+);
