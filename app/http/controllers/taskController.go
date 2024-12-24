@@ -5,6 +5,7 @@ import (
 
 	"github.com/and3407/go_reports/app/domain/task"
 	"github.com/and3407/go_reports/app/http/requests/task"
+	"github.com/and3407/go_reports/app/http/resources"
 
 	"github.com/gin-gonic/gin"
 )
@@ -34,5 +35,5 @@ func (controller TaskController) AddTask(ginContext *gin.Context) {
 		ginContext.JSON(http.StatusInternalServerError, "")
 	}
 
-	ginContext.JSON(http.StatusCreated, task)
+	ginContext.JSON(http.StatusCreated, resources.TaskResource{Task: task})
 }
